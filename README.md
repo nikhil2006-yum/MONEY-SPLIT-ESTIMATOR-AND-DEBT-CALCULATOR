@@ -3,13 +3,13 @@
 
 Expense Splitter is a Python-based application built to make group expense management simple, fast, and accurate. It helps users track shared expenses, calculate fair individual contributions, and minimize repayment complexity through optimized debt settlement.
 
-🎯 Perfect For:
+#🎯 Perfect For:
 👬 Friends on trips
 🏠 Roommates sharing bills
 👨‍💻 Team project expenses
 🎓 Academic mini-projects
 💼 Small group financial tracking
-✨ Features
+#✨ Features
 👥 Add multiple participants
 🧾 Record unlimited expenses
 ✅ Input validation for secure data entry
@@ -21,12 +21,12 @@ Final balances
 💰 Optimized settlement transactions
 💻 Lightweight CLI-based design
 🌐 Fully offline support
-🛠️ Technologies Used
+#🛠️ Technologies Used
 🐍 Python 3
 📚 defaultdict for efficient balance tracking
 📋 Lists & dictionaries for structured storage
 🧠 Greedy algorithm for transaction minimization
-📌 Methodology
+#📌 Methodology
 👤 Collect participant details
 💵 Record expense transactions
 🗂️ Store expenses systematically
@@ -35,10 +35,10 @@ Final balances
 🏦 Identify creditors & debtors
 🔍 Simplify transactions
 📢 Display final summary
-⚙️ Algorithms Implemented
+#⚙️ Algorithms Implemented
 ➗ Expense Distribution Algorithm
 Divides each expense equally among all participants
 📊 Balance Calculation Algorithm
 Tracks paid vs owed amounts for every user
-🧠 Greedy Debt Simplification Algorithm
+#🧠 Greedy Debt Simplification Algorithm
 Minimizes the number of repayment transactions
