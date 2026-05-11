@@ -1,0 +1,102 @@
+from collections import defaultdict
+
+# Step 1: Input number of people
+n = int(input("Enter number of people: "))
+
+people = []
+for i in range(n):
+    name = input(f"Enter name of person {i+1}: ").strip()
+    people.append(name)
+
+# Step 2: Take multiple expenses
+expenses = []
+
+while True:
+    print("\nEnter Expense Details")
+
+    paid_by = input(f"Who paid? {people}: ").strip()
+
+    if paid_by not in people:
+        print("Invalid name. Try again.")
+        continue
+
+    try:
+        amount = float(input("Enter amount: "))
+    except:
+        print("Invalid amount. Try again.")
+        continue
+
+    expenses.append({
+        "paid_by": paid_by,
+        "amount": amount,
+        "split_between": people
+    })
+
+    more = input("Add another expense? (y/n): ").lower()
+    if more != 'y':
+        break
+
+# Step 3: Calculate balance
+balance = defaultdict(float)
+
+for exp in expenses:
+    paid_by = exp["paid_by"]
+    amount = exp["amount"]
+    split = exp["split_between"]
+
+    share = amount / len(split)
+
+    for p in split:
+        balance[p] -= share
+    balance[paid_by] += amount
+
+# Step 4: Total Expense
+total_expense = sum(exp["amount"] for exp in expenses)
+per_person = total_expense / len(people)
+
+# Step 5: Simplify debts
+def simplify_debts(balance):
+    creditors = []
+    debtors = []
+
+    for person, amt in balance.items():
+        if amt > 0:
+            creditors.append([person, amt])
+        elif amt < 0:
+            debtors.append([person, -amt])
+
+    transactions = []
+
+    i, j = 0, 0
+
+    while i < len(debtors) and j < len(creditors):
+        debtor, d_amt = debtors[i]
+        creditor, c_amt = creditors[j]
+
+        settled = min(d_amt, c_amt)
+
+        transactions.append(f"{debtor} pays {creditor} ₹{settled:.2f}")
+
+        debtors[i][1] -= settled
+        creditors[j][1] -= settled
+
+        if debtors[i][1] == 0:
+            i += 1
+        if creditors[j][1] == 0:
+            j += 1
+
+    return transactions
+
+# Step 6: Output
+print("\nTotal Expense: ₹{:.2f}".format(total_expense))
+print("Each person should pay: ₹{:.2f}".format(per_person))
+
+print("\nFinal Balances:")
+for person in people:
+    print(f"{person}: ₹{balance[person]:.2f}")
+
+print("\nSimplified Transactions:")
+transactions = simplify_debts(balance)
+
+for t in transactions:
+    print(t)
